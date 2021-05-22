@@ -4,17 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,38 +32,30 @@ fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ){
-            horizontalColoredBar(myColor = Color.Blue)
-            horizontalColoredBar(myColor = Color.Magenta)
-            horizontalColoredBar(myColor = Color.Red)
-            horizontalColoredBar(myColor = Color.Yellow)
-            horizontalColoredBar(myColor = Color.Green)
-            horizontalColoredBar(myColor = Color.Cyan)
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                coloredSquare(myColor = Color.Red)
+                coloredSquare(myColor = Color.Magenta)
+            }
+            coloredSquare(myColor = Color.Cyan)
+            coloredSquare(myColor = Color.Blue)
+            coloredSquare(myColor = Color.Yellow)
+            coloredSquare(myColor = Color.Green)
+
         }
-//        Row (
-//            modifier = Modifier.fillMaxSize(),
-//            horizontalArrangement = Arrangement.SpaceEvenly,
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            horizontalColoredBar(myColor = Color.Blue)
-//            horizontalColoredBar(myColor = Color.Magenta)
-//            horizontalColoredBar(myColor = Color.Red)
-//            horizontalColoredBar(myColor = Color.Yellow)
-//            horizontalColoredBar(myColor = Color.Green)
-//            horizontalColoredBar(myColor = Color.Cyan)
-//        }
     }
 }
 
 @Composable
-fun horizontalColoredBar(myColor: Color) {
+fun coloredSquare(myColor: Color) {
     Surface(
         color = myColor,
-//        modifier = Modifier
-//            .height(300.dp)
-//            .width(20.dp)
         modifier = Modifier
-            .height(20.dp)
-            .width(300.dp)
+            .height(50.dp)
+            .width(50.dp)
     ) { }
 }
 
