@@ -31,10 +31,10 @@ fun MainScreen() {
         color = Color.DarkGray,
         modifier = Modifier.fillMaxSize()
         ) {
-        Row (
+        Column (
             modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ){
             horizontalColoredBar(myColor = Color.Blue)
             horizontalColoredBar(myColor = Color.Magenta)
@@ -43,6 +43,18 @@ fun MainScreen() {
             horizontalColoredBar(myColor = Color.Green)
             horizontalColoredBar(myColor = Color.Cyan)
         }
+//        Row (
+//            modifier = Modifier.fillMaxSize(),
+//            horizontalArrangement = Arrangement.SpaceEvenly,
+//            verticalAlignment = Alignment.CenterVertically
+//        ){
+//            horizontalColoredBar(myColor = Color.Blue)
+//            horizontalColoredBar(myColor = Color.Magenta)
+//            horizontalColoredBar(myColor = Color.Red)
+//            horizontalColoredBar(myColor = Color.Yellow)
+//            horizontalColoredBar(myColor = Color.Green)
+//            horizontalColoredBar(myColor = Color.Cyan)
+//        }
     }
 }
 
@@ -50,9 +62,12 @@ fun MainScreen() {
 fun horizontalColoredBar(myColor: Color) {
     Surface(
         color = myColor,
+//        modifier = Modifier
+//            .height(300.dp)
+//            .width(20.dp)
         modifier = Modifier
-            .height(300.dp)
-            .width(20.dp)
+            .height(20.dp)
+            .width(300.dp)
     ) { }
 }
 
