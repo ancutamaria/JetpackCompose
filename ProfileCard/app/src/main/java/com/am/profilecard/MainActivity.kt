@@ -31,14 +31,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                UserListScreen(userProfileList)
+                UserProfileListScreen(userProfileList)
             }
         }
     }
 }
 
 @Composable
-fun UserListScreen(userProfiles: List<UserProfile> = userProfileList) {
+fun UserProfileListScreen(
+    userProfiles: List<UserProfile> = userProfileList
+) {
     Scaffold(
         topBar = { AppBar() }
     ) {
@@ -49,6 +51,30 @@ fun UserListScreen(userProfiles: List<UserProfile> = userProfileList) {
                 items(userProfiles) { userProfile ->
                     ProfileCard(userProfile = userProfile)
                 }
+            }
+        }
+
+    }
+}
+
+@Composable
+fun UserProfileDetailsScreen(
+    userProfile: UserProfile = userProfileList[0]
+) {
+    Scaffold(
+        topBar = { AppBar() }
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Column (
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                ProfilePicture(userProfile.pictureUrl, userProfile.status, 240.dp)
+                ProfileContent(userProfile.name, userProfile.status, Alignment.CenterHorizontally)
             }
         }
 
@@ -70,7 +96,9 @@ fun AppBar() {
 }
 
 @Composable
-fun ProfileCard(userProfile: UserProfile) {
+fun ProfileCard(
+    userProfile: UserProfile
+) {
     Card(
         modifier = Modifier
             .padding(
@@ -160,29 +188,6 @@ fun ProfileContent(
 
 }
 
-
-@Composable
-fun UserProfileDetailsScreen(userProfile: UserProfile = userProfileList[0]) {
-    Scaffold(
-        topBar = { AppBar() }
-    ) {
-        Surface(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Column (
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
-            ) {
-                ProfilePicture(userProfile.pictureUrl, userProfile.status, 240.dp)
-                ProfileContent(userProfile.name, userProfile.status, Alignment.CenterHorizontally)
-            }
-        }
-
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun UserListPreview() {
@@ -195,7 +200,7 @@ fun UserListPreview() {
 @Composable
 fun UserProfileDetailsPreview() {
     MyTheme {
-        UserListScreen(userProfileList)
+        UserProfileListScreen(userProfileList)
     }
 }
 
