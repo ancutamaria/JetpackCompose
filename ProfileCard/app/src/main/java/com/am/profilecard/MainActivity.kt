@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.am.profilecard.ui.theme.MyTheme
+import com.am.profilecard.ui.theme.lightGreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +34,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.LightGray
+        modifier = Modifier.fillMaxSize()
     ) {
         ProfileCard()
     }
@@ -49,7 +49,8 @@ fun ProfileCard() {
             .wrapContentHeight(
                 align = Alignment.Top
             ),
-        elevation = 8.dp
+        elevation = 8.dp,
+        backgroundColor = Color.White
     ) {
         Row(
             modifier = Modifier
@@ -70,7 +71,7 @@ fun ProfilePicture() {
         shape = CircleShape,
         border = BorderStroke(
             width = 2.dp,
-            color = Color.Green,
+            color = MaterialTheme.colors.lightGreen,
         ),
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
