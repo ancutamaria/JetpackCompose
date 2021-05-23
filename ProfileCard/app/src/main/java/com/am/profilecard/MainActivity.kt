@@ -21,8 +21,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.transform.CircleCropTransformation
 import com.am.profilecard.ui.theme.MyTheme
 import com.am.profilecard.ui.theme.lightGreen
+import com.google.accompanist.coil.rememberCoilPainter
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,8 +111,13 @@ fun ProfilePicture(drawableId: Int, onlineStatus: Boolean) {
         elevation = 4.dp
     ) {
         Image(
-            painter = painterResource(id = drawableId),
-            contentDescription = "Profile picture",
+            painter = rememberCoilPainter(
+                request = "https://picsum.photos/300/300",
+                requestBuilder = {
+                    transformations(CircleCropTransformation())
+                },
+            ),
+            contentDescription = "ProfilePic",
             modifier = Modifier.size(72.dp),
             contentScale = ContentScale.Crop
         )
