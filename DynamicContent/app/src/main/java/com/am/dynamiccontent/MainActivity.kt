@@ -8,38 +8,66 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.am.dynamiccontent.ui.theme.DynamicContentTheme
-
-val namesList = arrayListOf("Ioana", "Cristi", "Ion", "Fanica", "Malina")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            greetingList(names = namesList)
+            MainScreen()
         }
     }
 }
 
 @Composable
-fun greetingList(names: List<String>) {
+fun MainScreen() {
+    val greetingListState = remember {
+        mutableStateListOf("Ioana")
+    }
+    val newNameState = remember {
+        mutableStateOf("")
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        for (name in names) {
-            Greeting(name)
-        }
-        Button(onClick = { namesList.add("Ionelu") }) {
-            Text("Add new name!")
-        }
+        GreetingList(
+            greetingListState,
+            { greetingListState.add(newNameState.value) },
+            newNameState.value,
+            { newName -> newNameState.value = newName }
+        )
+    }
+}
+
+@Composable
+fun GreetingList(
+    namesList: List<String>,
+    btnClick: () -> Unit,
+    textFieldValue: String,
+    textFieldUpdate: (newName: String) -> Unit,
+) {
+    for (name in namesList) {
+        Greeting(name = name)
+    }
+
+    TextField(
+        value = textFieldValue,
+        onValueChange = textFieldUpdate
+    )
+
+    Button(onClick = btnClick) {
+        Text("Add new name!")
     }
 }
 
@@ -54,5 +82,5 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    greetingList(names = namesList)
+    MainScreen()
 }
