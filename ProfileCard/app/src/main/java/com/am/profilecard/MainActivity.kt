@@ -45,9 +45,9 @@ fun MainScreen(userProfiles: List<UserProfile> = userProfileList) {
             modifier = Modifier.fillMaxSize()
         ) {
             LazyColumn {
-               items(userProfiles) { userProfile ->
-                   ProfileCard(userProfile = userProfile)
-               }
+                items(userProfiles) { userProfile ->
+                    ProfileCard(userProfile = userProfile)
+                }
             }
         }
 
@@ -57,12 +57,14 @@ fun MainScreen(userProfiles: List<UserProfile> = userProfileList) {
 @Composable
 fun AppBar() {
     TopAppBar(
-        navigationIcon = { Icon(
-            Icons.Default.Home,
-            "Navigation Icon",
-            Modifier.padding(horizontal = 12.dp)
-        ) },
-        title = { Text( "Messaging app users") }
+        navigationIcon = {
+            Icon(
+                Icons.Default.Home,
+                "Navigation Icon",
+                Modifier.padding(horizontal = 12.dp)
+            )
+        },
+        title = { Text("Messaging app users") }
     )
 }
 
@@ -103,8 +105,8 @@ fun ProfilePicture(pictureUrl: String, onlineStatus: Boolean) {
         border = BorderStroke(
             width = 2.dp,
             color = if (onlineStatus)
-                        MaterialTheme.colors.lightGreen
-                    else Color.Gray,
+                MaterialTheme.colors.lightGreen
+            else Color.Gray,
         ),
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
@@ -139,8 +141,8 @@ fun ProfileContent(username: String, onlineStatus: Boolean) {
         CompositionLocalProvider(LocalContentAlpha provides if (onlineStatus) ContentAlpha.medium else ContentAlpha.disabled) {
             Text(
                 text = if (onlineStatus)
-                           "Active now"
-                       else "Offline",
+                    "Active now"
+                else "Offline",
                 style = MaterialTheme.typography.body2
             )
         }
