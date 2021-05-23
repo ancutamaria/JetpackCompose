@@ -23,8 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import coil.transform.CircleCropTransformation
 import com.am.profilecard.ui.theme.MyTheme
@@ -56,8 +58,13 @@ fun UserProfileApp(
                 navController
             )
         }
-        composable("userProfile_details") {
-            UserProfileDetailsScreen()
+        composable(
+            route = "userProfile_details/{userProfileId}",
+            arguments = listOf(navArgument("userProfileId") {
+                type = NavType.IntType
+            })
+        ) { navBackStackEntry ->
+            UserProfileDetailsScreen(navBackStackEntry.arguments!!.getInt("userProfileId"))
         }
     }
 }
@@ -76,7 +83,7 @@ fun UserProfileListScreen(
             LazyColumn {
                 items(userProfiles) { userProfile ->
                     ProfileCard(userProfile = userProfile) {
-                        navController?.navigate("userProfile_details")
+                        navController?.navigate("userProfile_details/${userProfile.id}")
                     }
                 }
             }
@@ -87,8 +94,11 @@ fun UserProfileListScreen(
 
 @Composable
 fun UserProfileDetailsScreen(
-    userProfile: UserProfile = userProfileList[0]
+    userProfileId: Int
 ) {
+    val userProfile = userProfileList.first {
+        it.id == userProfileId
+    }
     Scaffold(
         topBar = { AppBar() }
     ) {
@@ -222,7 +232,7 @@ fun ProfileContent(
 @Composable
 fun UserListPreview() {
     MyTheme {
-        UserProfileDetailsScreen()
+        UserProfileDetailsScreen(5)
     }
 }
 
