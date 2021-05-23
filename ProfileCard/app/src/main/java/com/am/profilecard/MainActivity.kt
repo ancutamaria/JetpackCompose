@@ -22,7 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -65,7 +65,7 @@ fun UserProfileApp(
 @Composable
 fun UserProfileListScreen(
     userProfiles: List<UserProfile>,
-    navHostController: NavHostController?
+    navController: NavController?
 ) {
     Scaffold(
         topBar = { AppBar() }
@@ -76,7 +76,7 @@ fun UserProfileListScreen(
             LazyColumn {
                 items(userProfiles) { userProfile ->
                     ProfileCard(userProfile = userProfile) {
-                        navHostController?.navigate("userProfile_details")
+                        navController?.navigate("userProfile_details")
                     }
                 }
             }
@@ -140,7 +140,7 @@ fun ProfileCard(
             .wrapContentHeight(
                 align = Alignment.Top
             )
-            .clickable(onClick = { clickAction }),
+            .clickable(onClick =  clickAction ),
         elevation = 8.dp,
         backgroundColor = Color.White
     ) {
